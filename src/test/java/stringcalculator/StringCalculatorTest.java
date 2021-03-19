@@ -12,7 +12,7 @@ class StringCalculatorTest {
 
         StringCalculator stringCalculator = new StringCalculator();
 
-        String input = "1,2,3,4,5";
+        String input = "1;2\n3:4-5";
         assertThat(15).isEqualTo(stringCalculator.add(input));
 
     }
