@@ -12,8 +12,8 @@ class StringCalculatorTest {
 
         StringCalculator stringCalculator = new StringCalculator();
 
-        String input = "";
-        assertThat(0).isEqualTo(stringCalculator.add(input));
+        String input = "1,2,3,4,5";
+        assertThat(15).isEqualTo(stringCalculator.add(input));
 
     }
 
