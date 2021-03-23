@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeManagerTest {
 
     @Test
-    void payEmployees() {
+    void testPayEmployees() {
 
 
     }
