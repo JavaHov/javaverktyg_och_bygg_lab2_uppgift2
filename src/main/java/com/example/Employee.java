@@ -5,11 +5,16 @@ public class Employee {
 	private String id;
 	private double salary;
 	private boolean paid;
+	private boolean added;
 
 	public Employee(String id, double salary) {
 		this.id = id;
 		this.salary = salary;
 	}
+
+	public void setAdded(boolean added) { this.added = added; }
+
+	public boolean wasAdded() { return added; }
 
 	public String getId() {
 		return id;
