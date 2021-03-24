@@ -5,12 +5,15 @@ import java.util.List;
 
 public class EmployeeRepoDouble implements EmployeeRepository {
 
+    private List<Employee> employees;
+
+    public EmployeeRepoDouble(List<Employee> employees) {
+
+      this.employees = employees;
+    }
 
     @Override
     public List<Employee> findAll() {
-        List<Employee> employees = new ArrayList<>();
-
-        employees.add(new Employee("1",  34000));
 
         return employees;
     }
