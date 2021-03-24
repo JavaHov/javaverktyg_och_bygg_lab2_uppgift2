@@ -7,7 +7,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+
+@ExtendWith(MockitoExtension.class)
 class EmployeeManagerTest {
 
 
@@ -61,6 +68,25 @@ class EmployeeManagerTest {
         EmployeeManager employeeManager = new EmployeeManager(repoDouble, bankServiceDouble);
 
         assertThrows(RuntimeException.class, () -> employeeManager.payEmployees());
+
+    }
+
+    @Test
+    void testWithMockito() {
+
+
+    List<Employee> list = new ArrayList<>();
+    list.add(new Employee("1", 45000));
+
+    EmployeeRepository mockEmployeeRepo = mock(EmployeeRepository.class);
+    BankService mockBankService = mock(BankService.class);
+    EmployeeManager employeeManager = new EmployeeManager(mockEmployeeRepo, mockBankService);
+
+    assertNotNull(mockEmployeeRepo);
+    assertNotNull(mockBankService);
+    //when(mockEmployeeRepo.findAll()).thenReturn(list);
+    //assertThat(employeeManager.payEmployees()).isEqualTo(1);
+
 
     }
 }
