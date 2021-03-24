@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepoDouble implements EmployeeRepository {
@@ -7,7 +8,11 @@ public class EmployeeRepoDouble implements EmployeeRepository {
 
     @Override
     public List<Employee> findAll() {
-        return null;
+        List<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee("1",  34000));
+
+        return employees;
     }
 
     @Override

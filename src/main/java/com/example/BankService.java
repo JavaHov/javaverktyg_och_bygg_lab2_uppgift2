@@ -1,5 +1,5 @@
 package com.example;
 
-public interface  BankService {
+public interface   BankService {
 	void pay(String id, double amount);
 }
