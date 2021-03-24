@@ -48,4 +48,19 @@ class EmployeeManagerTest {
         assertThat(actual).isEqualTo(expected);
 
     }
+
+    @Test
+    void testPayEmployeesThrowsException() {
+
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(null);
+
+
+        EmployeeRepoDouble repoDouble = new EmployeeRepoDouble(employeeList);
+        BankServiceDouble bankServiceDouble = new BankServiceDouble();
+        EmployeeManager employeeManager = new EmployeeManager(repoDouble, bankServiceDouble);
+
+        assertThrows(NullPointerException.class, () -> employeeManager.payEmployees());
+
+    }
 }
