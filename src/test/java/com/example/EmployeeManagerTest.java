@@ -85,6 +85,7 @@ class EmployeeManagerTest {
     assertNotNull(mockEmployeeRepo);
     assertNotNull(mockBankService);
     //when(mockEmployeeRepo.findAll()).thenReturn(list);
+    //when(employeeManager.payEmployees()).thenReturn(1);
     //assertThat(employeeManager.payEmployees()).isEqualTo(1);
 
 
