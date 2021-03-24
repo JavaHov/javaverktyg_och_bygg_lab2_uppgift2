@@ -7,8 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -79,15 +78,30 @@ class EmployeeManagerTest {
     list.add(new Employee("1", 45000));
 
     EmployeeRepository mockEmployeeRepo = mock(EmployeeRepository.class);
-    BankService mockBankService = mock(BankService.class);
+    BankService mockBankService = new BankServiceDouble();
     EmployeeManager employeeManager = new EmployeeManager(mockEmployeeRepo, mockBankService);
 
     assertNotNull(mockEmployeeRepo);
     assertNotNull(mockBankService);
-    //when(mockEmployeeRepo.findAll()).thenReturn(list);
-    //when(employeeManager.payEmployees()).thenReturn(1);
-    //assertThat(employeeManager.payEmployees()).isEqualTo(1);
+    when(mockEmployeeRepo.findAll()).thenReturn(list);
+    assertThat(employeeManager.payEmployees()).isEqualTo(1);
+    }
+
+    @Test
+    void anotherTestWithMockito() {
 
 
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("1", 45000));
+
+        EmployeeRepository mockEmployeeRepo = mock(EmployeeRepository.class);
+        BankService mockBankService = mock(BankService.class);
+        EmployeeManager employeeManager = new EmployeeManager(mockEmployeeRepo, mockBankService);
+
+        when(mockEmployeeRepo.findAll()).thenReturn(list);
+        assertThat(employeeManager.payEmployees()).isEqualTo(1);
+
+        assertThat(list.get(0).isPaid()).isTrue();
+        verify(mockBankService, times(1)).pay("1", 45000);
     }
 }
