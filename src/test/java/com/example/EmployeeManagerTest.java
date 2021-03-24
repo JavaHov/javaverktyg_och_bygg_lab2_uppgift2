@@ -60,7 +60,7 @@ class EmployeeManagerTest {
         BankServiceDouble bankServiceDouble = new BankServiceDouble();
         EmployeeManager employeeManager = new EmployeeManager(repoDouble, bankServiceDouble);
 
-        assertThrows(NullPointerException.class, () -> employeeManager.payEmployees());
+        assertThrows(RuntimeException.class, () -> employeeManager.payEmployees());
 
     }
 }

@@ -21,6 +21,7 @@ public class EmployeeManager {
 				employee.setPaid(true);
 				payments++;
 			} catch (RuntimeException e) {
+				System.out.println(e.getMessage());
 				employee.setPaid(false);
 			}
 		}
