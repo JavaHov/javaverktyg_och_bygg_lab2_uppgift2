@@ -55,17 +55,22 @@ class InMemoryEmployeeRepoTestIT {
 
     }
 
+
     @Test
-    void testPayEmployeeWithInMemoryReturnsNull() {
+    void testPayEmpWithInMemWithArg() {
+
+
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("1", 12000));
+        list.add(new Employee("2", 14000));
 
         BankServiceDouble bankServiceDouble = new BankServiceDouble();
-        InMemoryEmployeeRepo inMemoryEmployeeRepo = new InMemoryEmployeeRepo();
+        InMemoryEmployeeRepo inMemoryEmployeeRepo = new InMemoryEmployeeRepo(list);
         EmployeeManager employeeManager = new EmployeeManager(inMemoryEmployeeRepo, bankServiceDouble);
 
-        Employee employee = new Employee("8", 70000);
-        Employee emp = inMemoryEmployeeRepo.save(employee);
-        assertNull(emp);
+        assertThat(employeeManager.payEmployees()).isEqualTo(2);
 
+        assertThat(list.get(0).isPaid() && list.get(1).isPaid()).isTrue();
 
     }
 }
