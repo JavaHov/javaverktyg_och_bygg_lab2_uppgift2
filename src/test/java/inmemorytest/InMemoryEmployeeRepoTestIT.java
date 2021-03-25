@@ -1,5 +1,6 @@
 package inmemorytest;
 
+import com.example.BankService;
 import com.example.BankServiceDouble;
 import com.example.Employee;
 import com.example.EmployeeManager;
@@ -62,16 +63,17 @@ class InMemoryEmployeeRepoTestIT {
 
         List<Employee> list = new ArrayList<>();
         list.add(new Employee("1", 12000));
-        list.add(new Employee("2", 14000));
 
-        BankServiceDouble bankServiceDouble = new BankServiceDouble();
+     //   BankServiceDouble bankServiceDouble = new BankServiceDouble();
+        BankService mockBankService = mock(BankService.class);
         InMemoryEmployeeRepo inMemoryEmployeeRepo = new InMemoryEmployeeRepo(list);
-        EmployeeManager employeeManager = new EmployeeManager(inMemoryEmployeeRepo, bankServiceDouble);
+        EmployeeManager employeeManager = new EmployeeManager(inMemoryEmployeeRepo, mockBankService);
 
-        assertThat(employeeManager.payEmployees()).isEqualTo(2);
+        assertThat(employeeManager.payEmployees()).isEqualTo(1);
 
 
         assertThat(list).allSatisfy(e -> e.isPaid());
-
+        verify(mockBankService, times(1)).pay("1", 12000);
+        assertThat(list).doesNotContainNull();
     }
 }
