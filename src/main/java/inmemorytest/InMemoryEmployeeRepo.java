@@ -25,6 +25,11 @@ public class InMemoryEmployeeRepo implements EmployeeRepository {
 
     }
 
+    public InMemoryEmployeeRepo(List<Employee> list) {
+
+        this.employees = list;
+    }
+
     @Override
     public List<Employee> findAll() {
 
@@ -48,6 +53,7 @@ public class InMemoryEmployeeRepo implements EmployeeRepository {
         if(found) {
             employees.add(e);
             e.setAdded(true);
+            e.setId("0");
             return e;
         }
         else

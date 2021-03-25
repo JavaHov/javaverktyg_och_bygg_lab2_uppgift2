@@ -1,6 +1,8 @@
 package inmemorytest;
 
+import com.example.BankServiceDouble;
 import com.example.Employee;
+import com.example.EmployeeManager;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,33 @@ class InMemoryEmployeeRepoTestIT {
         assertNotNull(e);
 
         assertThat(e.wasAdded()).isTrue();
+
+    }
+
+    @Test
+    void testPayEmployeeWithInMemory() {
+
+        BankServiceDouble bankServiceDouble = new BankServiceDouble();
+        InMemoryEmployeeRepo inMemoryEmployeeRepo = new InMemoryEmployeeRepo();
+        EmployeeManager employeeManager = new EmployeeManager(inMemoryEmployeeRepo, bankServiceDouble);
+
+        Employee employee = new Employee("4", 70000);
+        Employee emp = inMemoryEmployeeRepo.save(employee);
+        assertThat(emp.wasAdded()).isTrue();
+
+    }
+
+    @Test
+    void testPayEmployeeWithInMemoryReturnsNull() {
+
+        BankServiceDouble bankServiceDouble = new BankServiceDouble();
+        InMemoryEmployeeRepo inMemoryEmployeeRepo = new InMemoryEmployeeRepo();
+        EmployeeManager employeeManager = new EmployeeManager(inMemoryEmployeeRepo, bankServiceDouble);
+
+        Employee employee = new Employee("8", 70000);
+        Employee emp = inMemoryEmployeeRepo.save(employee);
+        assertNull(emp);
+
 
     }
 }
