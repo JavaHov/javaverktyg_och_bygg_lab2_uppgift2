@@ -5,16 +5,17 @@ import com.example.Employee;
 import com.example.EmployeeRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class InMemoryEmployeeRepo implements EmployeeRepository {
 
-    private List<Employee> employees = new ArrayList<>();
+    private List<Employee> employees;
 
 
-    @Override
-    public List<Employee> findAll() {
+    public InMemoryEmployeeRepo() {
 
+        employees = new ArrayList<>();
         employees.add(new Employee("1", 21000));
         employees.add(new Employee("2", 22000));
         employees.add(new Employee("3", 23000));
@@ -22,21 +23,34 @@ public class InMemoryEmployeeRepo implements EmployeeRepository {
         employees.add(new Employee("5", 25000));
         employees.add(new Employee("6", 26000));
 
+    }
+
+    @Override
+    public List<Employee> findAll() {
+
         return employees;
     }
 
     @Override
     public Employee save(Employee e) {
 
-        for(Employee employee : employees) {
+        boolean found = false;
 
-            if(e.getId() == employee.getId()) {
+        Iterator<Employee> iterator = employees.listIterator();
+        while(iterator.hasNext()) {
 
-                employees.remove(employee);
-                employees.add(e);
-                e.setAdded(true);
+            if(iterator.next().getId() == e.getId()) {
+
+                iterator.remove();
+                found = true;
             }
         }
-        return e;
+        if(found) {
+            employees.add(e);
+            e.setAdded(true);
+            return e;
+        }
+        else
+            return null;
     }
 }
