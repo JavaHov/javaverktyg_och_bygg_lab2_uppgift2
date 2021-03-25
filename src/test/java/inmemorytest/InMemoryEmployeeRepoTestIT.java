@@ -70,7 +70,7 @@ class InMemoryEmployeeRepoTestIT {
 
         assertThat(employeeManager.payEmployees()).isEqualTo(2);
 
-        assertThat(list.get(0).isPaid() && list.get(1).isPaid()).isTrue();
+
         assertThat(list).allSatisfy(e -> e.isPaid());
 
     }
