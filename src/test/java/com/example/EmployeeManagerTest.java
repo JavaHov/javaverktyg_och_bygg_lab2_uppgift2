@@ -70,6 +70,24 @@ class EmployeeManagerTest {
 
     }
 
+    // Adding more correct ExceptionTest...
+    @Test
+    void bankServicePayThrowsException() {
+
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("1", 34000));
+
+        EmployeeRepoDouble employeeRepoDouble = new EmployeeRepoDouble(list);
+        BankService mockBankService = mock(BankService.class);
+        EmployeeManager employeeManager = new EmployeeManager(employeeRepoDouble, mockBankService);
+
+        doThrow(RuntimeException.class).when(mockBankService).pay("1", 34000);
+        employeeManager.payEmployees();
+        assertThat(list.get(0).isPaid()).isFalse();
+        assertThat(employeeManager.payEmployees()).isEqualTo(0);
+
+    }
+
     @Test
     void testWithMockito() {
 
